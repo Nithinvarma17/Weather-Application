@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <h1>Weather APP</h1>
+        <input type="text" id="locationInput" placeholder="Enter Location">
+        <button id="btn" onclick="getWeather()">GetWeather</button>
+        <div id="weatherInfo"></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script>
+       function getWeather(){
+        const locationInput = document.getElementById("locationInput").value;
+            $.get(`https://api.openweathermap.org/data/2.5/weather?q=${locationInput}&appid=050987b025505ae8c42c97875eebdcb2`, function(data, status){
+                const temp = (data.main.temp-273.15).toFixed(2);
+                const weatherDesc = data.weather[0].description;
+                const weather = `${temp}°C, ${weatherDesc}`;
+                document.getElementById("weatherInfo").innerText = weather;
+            })
+
+       }
+    </script>
+    
+</body>
+</html>
